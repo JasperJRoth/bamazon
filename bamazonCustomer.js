@@ -61,7 +61,8 @@ function confirmOrder(id, quantity){
             console.log("Insufficient quantity!");
             connection.end();
         }else{
-            console.log(`${quantity}x ${item.product_name} - TOTAL: $${item.price * quantity}`);
+            var totalCost = (item.price * quantity).toFixed(2);
+            console.log(`${quantity}x ${item.product_name} - TOTAL: $${totalCost}`);
             inquirer.prompt({
                 type: "confirm",
                 name: "conf",
@@ -71,7 +72,7 @@ function confirmOrder(id, quantity){
                     console.log("Cancelling Transaction...");
                     connection.end();
                 }else{
-                    completeOrder(id, quantity, item.price * quantity);
+                    completeOrder(id, quantity, (item.price * quantity));
                 }
             });
         }
